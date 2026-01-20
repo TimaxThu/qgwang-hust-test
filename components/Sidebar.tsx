@@ -9,7 +9,7 @@ const Sidebar: React.FC = () => {
         {/* Profile Image - Adjusted for portrait orientation (3:4 aspect ratio) */}
         <div className="w-48 h-64 lg:w-64 lg:h-80 rounded-xl bg-gray-100 overflow-hidden shadow-md border border-slate-200">
           <img 
-            src="https://qgwang-hust.github.io/images/me.png" 
+            src="https://github.com/qgwang-hust/QinggangWang/blob/main/me.jpg" 
             alt={PROFILE.name} 
             className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
           />
