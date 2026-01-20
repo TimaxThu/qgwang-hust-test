@@ -104,7 +104,11 @@ const App: React.FC = () => {
             {/* About Me */}
             <Section id="about" title="About Me">
               <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed text-lg">
-                <p>{PROFILE.bio}</p>
+                {PROFILE.bio.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx} className={idx === 1 ? "font-bold mt-6" : ""}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </Section>
 
@@ -124,48 +128,53 @@ const App: React.FC = () => {
 
             {/* Publications Section */}
             <Section id="publications" title="Publications" actions={publicationActions}>
-              <p className="mb-6 text-[11px] text-slate-400 italic">
+              <p className="mb-6 text-xs text-slate-400 italic">
                 <span className="font-extrabold text-slate-600">*</span> Corresponding author
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {displayedPublications.map((pub, idx) => (
-                  <div key={idx} className="group relative">
-                    <a 
-                      href={pub.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <h3 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-indigo-600 transition-colors">
-                        {pub.title}
-                      </h3>
-                    </a>
+                  <div key={idx} className="group relative flex gap-4">
+                    {/* Project Symbol / Bullet Point */}
+                    <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors flex-shrink-0" />
                     
-                    <p className="mt-1 text-slate-600 text-sm font-medium">
-                      {pub.authors.split(', ').map((author, i) => {
-                        const isCorresponding = author.trim().endsWith('*');
-                        const cleanName = isCorresponding ? author.trim().slice(0, -1) : author.trim();
-                        const isSelf = cleanName === PROFILE.name;
-                        
-                        return (
-                          <span key={i}>
-                            <span className={`${isSelf ? 'text-slate-900 border-b-2 border-indigo-200 font-semibold' : ''}`}>
-                              {cleanName}{isCorresponding && <sup className="text-indigo-500 ml-0.5 font-bold" title="Corresponding Author">*</sup>}
+                    <div className="flex-1">
+                      <a 
+                        href={pub.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <h3 className="text-base font-normal text-slate-900 leading-snug group-hover:text-indigo-600 transition-colors">
+                          {pub.title}
+                        </h3>
+                      </a>
+                      
+                      <p className="mt-1.5 text-slate-600 text-base font-normal">
+                        {pub.authors.split(', ').map((author, i) => {
+                          const isCorresponding = author.trim().endsWith('*');
+                          const cleanName = isCorresponding ? author.trim().slice(0, -1) : author.trim();
+                          const isSelf = cleanName === PROFILE.name;
+                          
+                          return (
+                            <span key={i}>
+                              <span className={`${isSelf ? 'text-slate-900 border-b-2 border-indigo-200 font-semibold' : ''}`}>
+                                {cleanName}{isCorresponding && <sup className="text-indigo-500 ml-0.5 font-bold" title="Corresponding Author">*</sup>}
+                              </span>
+                              {i < pub.authors.split(', ').length - 1 ? ', ' : ''}
                             </span>
-                            {i < pub.authors.split(', ').length - 1 ? ', ' : ''}
+                          );
+                        })}
+                      </p>
+                      
+                      <div className="mt-1.5 flex items-center space-x-4">
+                        <span className="text-sm font-bold italic text-slate-700">{pub.venue} {pub.year}</span>
+                        {pub.tags?.map((tag, i) => (
+                          <span key={i} className="text-[11px] uppercase tracking-widest font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">
+                            {tag}
                           </span>
-                        );
-                      })}
-                    </p>
-                    
-                    <div className="mt-1 flex items-center space-x-4">
-                      <span className="text-[13px] font-bold italic text-slate-700">{pub.venue} {pub.year}</span>
-                      {pub.tags?.map((tag, i) => (
-                        <span key={i} className="text-[9px] uppercase tracking-widest font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded">
-                          {tag}
-                        </span>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}

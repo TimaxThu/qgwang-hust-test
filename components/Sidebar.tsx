@@ -6,12 +6,12 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="w-full lg:w-80 flex-shrink-0 lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)]">
       <div className="flex flex-col items-center lg:items-start space-y-6">
-        {/* Profile Image - Always Bright */}
-        <div className="w-48 h-48 lg:w-64 lg:h-64 rounded-2xl bg-gray-200 overflow-hidden shadow-sm border border-gray-100">
+        {/* Profile Image - Adjusted for portrait orientation (3:4 aspect ratio) */}
+        <div className="w-48 h-64 lg:w-64 lg:h-80 rounded-xl bg-gray-100 overflow-hidden shadow-md border border-slate-200">
           <img 
-            src="https://picsum.photos/seed/qgwang/400/400" 
+            src="https://qgwang-hust.github.io/images/me.png" 
             alt={PROFILE.name} 
-            className="w-full h-full object-cover transition-all duration-500"
+            className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
           />
         </div>
 
@@ -24,9 +24,9 @@ const Sidebar: React.FC = () => {
 
         {/* Contact Links */}
         <div className="flex flex-col space-y-3 w-full border-t border-slate-100 pt-6">
-          <div className="flex items-center space-x-3 text-slate-600 group">
+          <div className="flex items-center space-x-3 text-slate-600 group cursor-pointer" onClick={() => window.location.href = `mailto:${PROFILE.email}`}>
             <svg className="w-4 h-4 text-slate-400 group-hover:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            <span className="text-sm font-semibold tracking-tight">{PROFILE.email}</span>
+            <span className="text-sm font-semibold tracking-tight group-hover:text-indigo-600 transition-colors">{PROFILE.email}</span>
           </div>
           
           <div className="flex flex-wrap gap-2 pt-2 justify-center lg:justify-start">
