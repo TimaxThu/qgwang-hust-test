@@ -21,10 +21,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         # Use npm install if package-lock.json doesn't exist, but npm ci is better for CI.
         # I'll check if package-lock.json exists.
 
