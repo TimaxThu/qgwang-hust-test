@@ -12,6 +12,9 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
+  },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
